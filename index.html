@@ -8,64 +8,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        .chat-bubble-user { background-color: #3B82F6; color: white; border-radius: 18px 18px 0 18px; }
-        .chat-bubble-bot { background-color: #E5E7EB; color: #1F2937; border-radius: 18px 18px 18px 0; }
-        .fade-in { animation: fadeIn 0.5s ease-in forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Estilos específicos de transição que podem variar por página */
         html { scroll-behavior: smooth; }
-
-        /* Floating Chat Styles */
-        #chat-box {
-            display: none;
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 380px;
-            height: 550px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            z-index: 1000;
-            flex-direction: column;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        #chat-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background: #2563eb;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(37,99,235,0.4);
-            z-index: 1000;
-            transition: transform 0.2s ease;
-        }
-        #chat-btn:hover { transform: scale(1.1); }
-        @media (max-width: 480px) {
-            #chat-box {
-                width: 100%;
-                height: 100%;
-                right: 0;
-                bottom: 0;
-                border-radius: 0;
-            }
-        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
 
+    <div id="scroll-progress" aria-hidden="true"></div>
+
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 glass border-b border-slate-200">
+    <nav class="fixed w-full z-50 glass border-b border-slate-200" data-reveal="down">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
@@ -84,7 +38,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4">
+    <section class="pt-32 pb-20 px-4" data-reveal="scale">
         <div class="max-w-7xl mx-auto text-center">
             <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 mb-6 tracking-tight">
                 Reduzindo filas, <br><span class="text-blue-600">humanizando o atendimento.</span>
@@ -100,7 +54,7 @@
     </section>
 
     <!-- Problem/Solution Section -->
-    <section id="sobre" class="py-20 bg-white">
+    <section id="sobre" class="py-20 bg-white" data-reveal="left">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div>
@@ -124,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-blue-50 p-8 rounded-3xl border border-blue-100 shadow-inner">
+                <div class="bg-blue-50 p-8 rounded-3xl border border-blue-100 shadow-inner" data-reveal="right" data-reveal-delay="1">
                     <span class="text-blue-600 font-semibold uppercase tracking-wider text-sm">A Solução</span>
                     <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-6">Fila Zero Saúde: O Primeiro Contato Inteligente.</h2>
                     <p class="text-lg text-slate-600 leading-relaxed mb-6">
@@ -150,21 +104,21 @@
     </section>
 
     <!-- How it Works Section -->
-    <section id="solucao" class="py-20 bg-slate-50">
+    <section id="solucao" class="py-20 bg-slate-50" data-reveal>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-4xl font-bold text-slate-900 mb-16">Como funciona o Modelo Híbrido</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition" data-reveal data-reveal-delay="1">
                     <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 mx-auto font-bold text-xl">1</div>
                     <h3 class="text-xl font-bold mb-4">Entrada & IA</h3>
                     <p class="text-slate-600 leading-relaxed">O usuário interage por texto. A IA identifica a intenção e calcula a demanda atual.</p>
                 </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition" data-reveal data-reveal-delay="2">
                     <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 mx-auto font-bold text-xl">2</div>
                     <h3 class="text-xl font-bold mb-4">Resolução Automática</h3>
                     <p class="text-slate-600 leading-relaxed">Respostas instantâneas sobre documentos e estimativas de espera baseadas em médias reais.</p>
                 </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition" data-reveal data-reveal-delay="3">
                     <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 mx-auto font-bold text-xl">3</div>
                     <h3 class="text-xl font-bold mb-4">Transbordo Humano</h3>
                     <p class="text-slate-600 leading-relaxed">Casos complexos são transferidos via WhatsApp com um resumo estruturado da triagem.</p>
@@ -174,18 +128,19 @@
     </section>
 
     <!-- Demo Section -->
-    <section id="demo" class="py-20 bg-white">
+    <section id="demo" class="py-20 bg-white" data-reveal>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-slate-900 mb-4">Experimente nossa IA</h2>
                 <p class="text-slate-600">Toda a triagem agora acontece em nosso assistente flutuante.</p>
             </div>
 
-            <div class="max-w-4xl mx-auto text-center bg-blue-50 p-12 rounded-3xl border-2 border-dashed border-blue-200">
+            <div class="max-w-4xl mx-auto text-center bg-blue-50 p-12 rounded-3xl border-2 border-dashed border-blue-200" data-reveal="scale">
                 <div class="mb-8">
                     <div class="w-20 h-20 bg-blue-600 text-white rounded-full flex items-center justify-center text-4xl mx-auto mb-4 shadow-lg animate-bounce">💬</div>
                     <h3 class="text-2xl font-bold text-slate-800 mb-2">O Chatbot está pronto!</h3>
-                    <p class="text-slate-600 mb-8">Clique no botão azul no canto inferior direito da tela para iniciar sua triagem e consultar tempos de espera.</p>
+                    <p class="text-slate-600 mb-2">Clique no botão azul no canto inferior direito da tela para iniciar sua triagem e consultar tempos de espera.</p>
+                    <p class="text-sm text-slate-500 mb-8">Demonstração local com resposta segura e fallback offline para testes sem credenciais de produção.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
@@ -199,8 +154,7 @@
     </section>
 
     <!-- Ethics Section -->
-    <!-- Ethics Section -->
-    <section id="etica" class="py-20 bg-slate-900 text-white">
+    <section id="etica" class="py-20 bg-slate-900 text-white" data-reveal>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4">Ética, Segurança e Privacidade</h2>
@@ -278,255 +232,6 @@
         </div>
     </div>
 
-    <script>
-        const GROQ_API_KEY = "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";
-        const PROXY_URL = ""; // 👈 COLOQUE AQUI A URL DO SEU CLOUDFLARE WORKER QUANDO CRIAR
-        const WHATSAPP_NUMBER = "5534996547968";
-        const chatMessages = document.getElementById('chat-messages');
-        const chatInput = document.getElementById('chat-input');
-
-        function toggleChat() {
-            const box = document.getElementById('chat-box');
-            const btn = document.getElementById('chat-btn');
-            const isHidden = box.style.display === 'none' || box.style.display === '';
-
-            if (!isHidden) {
-                box.style.display = 'none';
-                btn.style.display = 'flex';
-            } else {
-                box.style.display = 'flex';
-                btn.style.display = 'none';
-            }
-        }
-
-        function openChatAndSend(text) {
-            toggleChat();
-            setTimeout(() => {
-                chatInput.value = text;
-                handleSendMessage();
-            }, 300);
-        }
-
-        const PredictionEngine = {
-            getMultipliers() {
-                const now = new Date();
-                const day = now.getDay();
-                const hour = now.getHours();
-                let multiplier = 1.0;
-                if (day === 1 || day === 5) multiplier *= 1.4;
-                if (day === 0 || day === 6) multiplier *= 1.2;
-                if (hour >= 7 && hour <= 10) multiplier *= 1.5;
-                if (hour >= 18 && hour <= 21) multiplier *= 1.3;
-                const month = now.getMonth();
-                if (month === 11) multiplier *= 1.6;
-                return multiplier;
-            },
-            calculateWait(baseMinutes) {
-                const mult = this.getMultipliers();
-                // Adiciona uma variação aleatória de +/- 15% para não ser um número exato e parecer real
-                const variance = 0.85 + (Math.random() * 0.3);
-                const finalTime = Math.round(baseMinutes * mult * variance);
-                const h = Math.floor(finalTime / 60);
-                const m = finalTime % 60;
-                let timeStr = "";
-                if (h > 0) timeStr += `${h}h `;
-                if (m > 0) timeStr += `${m}min`;
-                if (h === 0 && m === 0) timeStr = "Menos de 15min";
-                return timeStr;
-            }
-        };
-
-        const healthData = {
-            uai: {
-                baseWait: 120, // Tempo médio geral para a UAI
-                docs: {
-                    'RG': 'Certidão de Nascimento/Casamento, Comprovante de Residência e CPF.',
-                    'CNH': 'Doc com foto, Comprovante de Residência e exames.'
-                }
-            },
-            hospitals: {
-                'HC-UFU': { base: 240, status: 'Lotado' },
-                'Santa Casa': { base: 120, status: 'Moderado' },
-                'Pronto Socorro Municipal': { base: 360, status: 'Crítico' },
-                'Hospital Municipal': { base: 90, status: 'Estável' }
-            }
-        };
-
-        const botResponses = {
-            'hospitais': {
-                keywords: ['hospital', 'hospitais', 'pronto socorro', 'emergencia', 'hc', 'santa casa'],
-                response: () => {
-                    let res = `🏥 *Estimativa Atualizada (Baseada em demanda e horário):*\n\n`;
-                    for (const [hosp, data] of Object.entries(healthData.hospitals)) {
-                        const wait = PredictionEngine.calculateWait(data.base);
-                        res += `🔹 ${hosp}: aprox. ${wait} (${data.status})\n`;
-                    }
-                    res += `\n⚠️ *Nota:* Este é um cálculo preditivo baseado em médias históricas de Uberlândia.`;
-                    return res;
-                }
-            },
-            'fila': {
-                keywords: ['tempo', 'espera', 'fila', 'demora', 'uai', 'centro'],
-                response: () => {
-                    const wait = PredictionEngine.calculateWait(healthData.uai.baseWait);
-                    return `⏳ *UAI Uberlândia - Estimativa para agora:*\n\n🔹 Tempo médio de espera: aproximadamente ${wait}\n\nLembrando que esse valor flutua conforme a chegada de novos pacientes. Deseja agendar seu horário?`;
-                }
-            },
-            'documentação': {
-                keywords: ['documento', 'levar', 'papel', 'rg', 'cnh', 'identidade'],
-                response: `📄 *Documentos Necessários (UAI Uberlândia):*\n\n🆔 RG: ${healthData.uai.docs.RG}\n🚗 CNH: ${healthData.uai.docs.CNH}\n\nLeve sempre os originais.`,
-            },
-            'whatsapp': {
-                keywords: ['whatsapp', 'humano', 'atendente', 'pessoa', 'falar com alguém', 'agendar'],
-                response: 'Estou redirecionando você para o nosso atendimento via WhatsApp. Vou enviar o resumo da sua triagem!',
-                action: 'redirect_whatsapp'
-            },
-            'default': {
-                response: 'Sinto muito, não consegui identificar sua dúvida. Tente perguntar sobre "Tempo de espera nos hospitais", "Fila da UAI" ou "Falar com atendente".'
-            }
-        };
-
-        async function callGroqAPI(userMessage, context) {
-            try {
-                const url = PROXY_URL || "https://api.groq.com/openai/v1/chat/completions";
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...(PROXY_URL ? {} : { "Authorization": `Bearer ${GROQ_API_KEY}` })
-                    },
-                    body: JSON.stringify({
-                        model: "llama-3.3-70b-versatile",
-                        messages: [
-                            {
-                                role: "system",
-                                content: `Você é a IA do "Fila Zero Saúde", um assistente para Uberlândia, MG.
-                                Seu objetivo é ser empático, profissional e direto.
-                                REGRAS CRÍTICAS:
-                                1. NUNCA realize diagnósticos médicos ou prescreva tratamentos.
-                                2. Use a seguinte base de dados para responder sobre esperas (SÃO ESTIMATIVAS):
-                                ${JSON.stringify(context)}
-                                3. Se o usuário quiser falar com humano ou agendar, incentive-o a usar o botão de WhatsApp.
-                                4. Seja acolhedor e mantenha o tom de assistência em saúde.`
-                            },
-                            { role: "user", content: userMessage }
-                        ],
-                        temperature: 0.7
-                    })
-                });
-
-                if (!response.ok) throw new Error("CORS ou API Error");
-
-                const data = await response.json();
-                return data.choices[0].message.content;
-            } catch (error) {
-                console.warn("Usando motor de contingência local...", error);
-                return null;
-            }
-        }
-
-        function appendMessage(text, sender) {
-            const div = document.createElement('div');
-            div.className = sender === 'user' ? 'chat-bubble-user p-3 max-w-[80%] ml-auto fade-in' : 'chat-bubble-bot p-3 max-w-[80%] fade-in';
-            div.innerText = text;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function showTyping() {
-            const div = document.createElement('div');
-            div.id = 'typing-indicator';
-            div.className = 'chat-bubble-bot p-3 max-w-[80%] fade-in';
-            div.innerHTML = `<div class="flex gap-1 p-1"><span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span><span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0.2s"></span><span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0.4s"></span></div>`;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function removeTyping() {
-            const indicator = document.getElementById('typing-indicator');
-            if (indicator) indicator.remove();
-        }
-
-        async function handleSendMessage() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-            appendMessage(text, 'user');
-            chatInput.value = '';
-
-            if (text.toLowerCase().includes('whatsapp') || text.toLowerCase().includes('atendente') || text.toLowerCase().includes('humano')) {
-                appendMessage("Claro! Estou te redirecionando para o nosso atendimento via WhatsApp agora mesmo.", 'bot');
-                setTimeout(() => redirectToWhatsApp(text), 1500);
-                return;
-            }
-
-            showTyping();
-
-            const context = {
-                uai_espera: PredictionEngine.calculateWait(healthData.uai.baseWait),
-                hospitais_espera: {},
-                docs: healthData.uai.docs
-            };
-            for (const [hosp, data] of Object.entries(healthData.hospitals)) {
-                context.hospitais_espera[hosp] = `${PredictionEngine.calculateWait(data.base)} (${data.status})`;
-            }
-
-            const aiResponse = await callGroqAPI(text, context);
-            removeTyping();
-
-            if (aiResponse) {
-                appendMessage(aiResponse, 'bot');
-            } else {
-                // FALLBACK: Se a API falhar (CORS/Key), usa a lógica de respostas aprimoradas
-                processResponse(text);
-            }
-        }
-
-        function sendQuickReply(text) {
-            chatInput.value = text;
-            handleSendMessage();
-        }
-
-        function processResponse(text) {
-            const lowerText = text.toLowerCase();
-            let found = false;
-
-            for (const key in botResponses) {
-                if (key === 'default') continue;
-                const category = botResponses[key];
-                if (category.keywords && category.keywords.some(k => lowerText.includes(k))) {
-                    let msg = typeof category.response === 'function' ? category.response() : category.response;
-
-                    // Adiciona variações para parecer mais natural
-                    const intros = ["Com certeza! ", "Entendo. ", "Aqui estão as informações: ", "Deixe-me verificar... ", "Claro! "];
-                    msg = intros[Math.floor(Math.random() * intros.length)] + msg;
-
-                    appendMessage(msg, 'bot');
-                    if (category.action === 'redirect_whatsapp') {
-                        setTimeout(() => redirectToWhatsApp(text), 2000);
-                    }
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                const defaults = [
-                    botResponses.default.response,
-                    "Não consegui processar isso agora, mas posso te ajudar com tempos de espera na UAI ou Hospitais. O que prefere?",
-                    "Desculpe, ainda estou aprendendo. Tente perguntar sobre 'documentos' ou 'espera na UAI'.",
-                    "Hum, não entendi bem. Você gostaria de falar com um atendente via WhatsApp?"
-                ];
-                appendMessage(defaults[Math.floor(Math.random() * defaults.length)], 'bot');
-            }
-        }
-
-        function redirectToWhatsApp(lastUserMessage) {
-            const summary = `*Olá! Gostaria de atendimento na UAI/Saúde Uberlândia.*\n\n*Triagem Digital:*\n- Motivo: ${lastUserMessage}\n- Origem: Portal Fila Zero`;
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(summary)}`, '_blank');
-        }
-
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleSendMessage();
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
